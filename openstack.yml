@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: Updating and upgrading the operating system
+    yum:
+      name: "*"
+      state: latest
+      update_cache: true
+
+- hosts: centOS_server
+  become: true
+  roles:
+      - ntp
+      - openstack_package
+      - sql_database
+      - memcached
+      - etcd
